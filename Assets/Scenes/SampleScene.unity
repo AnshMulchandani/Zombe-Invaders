@@ -5507,14 +5507,14 @@ MonoBehaviour:
   enableTracking: 0
   numberOfPlayers: 3
   numberOfBaseStations: 4
-  enableRotation: 1
+  enableRotation: 0
   enableYAxis: 1
   virtualWorldSpace: {x: 100, y: 1, z: 100}
   players:
   - {fileID: 931479201}
   - {fileID: 2039963491}
-  - {fileID: 1019132582}
-  - {fileID: 1359608445}
+  - {fileID: 2039963491}
+  - {fileID: 2039963491}
   calibrationSaveFilePath: D:\Calibration\Eje Z
   playerSelected: 1
   trackingDisabledPlayerSpeed: 5
