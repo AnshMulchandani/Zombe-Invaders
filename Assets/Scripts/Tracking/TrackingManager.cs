@@ -224,14 +224,16 @@ public class TrackingManager : MonoBehaviour
     private void Update()
     {
         ListenToControls();
-
+        Debug.Log("AAAAA");
         //if tracking is not enabled move players with keyboard
         if (!enableTracking)
         {
             DisabledTrackingPlayerSelector();
 
             DisabledTrackingPlayerMovement();
+            Debug.Log("TRACKING DISABLED");
         }
+        Debug.Log("BBBB");
     }
 
     /// <summary>
@@ -286,6 +288,7 @@ public class TrackingManager : MonoBehaviour
         Keyboard kb = Keyboard.current;
         if (kb == null) return;
 
+        Debug.Log("MOVING PLAYER "+ playerSelected);
         if (kb.wKey.isPressed) move += Vector3.forward;
         if (kb.sKey.isPressed) move += Vector3.back;
         if (kb.aKey.isPressed) move += Vector3.left;

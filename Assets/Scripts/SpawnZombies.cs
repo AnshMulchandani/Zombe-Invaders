@@ -6,7 +6,9 @@ public class SpawnZombies : MonoBehaviour
 {
     public float timeBetweenSpawns = 2f; 
     public GameObject zombiePrefab;
-    
+    public Transform targetA;
+    public Transform targetB;
+
     [System.Serializable] 
     public class SpawnZone
     {
@@ -22,10 +24,6 @@ public class SpawnZombies : MonoBehaviour
         if (spawnZones.Count > 0)
         {
             StartCoroutine(SpawnRoutine());
-        }
-        else
-        {
-            Debug.LogWarning("No spawn zones assigned to " + gameObject.name);
         }
     }
     
@@ -48,10 +46,23 @@ public class SpawnZombies : MonoBehaviour
         float minZ = Mathf.Min(zone.cornerA.position.z, zone.cornerB.position.z);
         float maxZ = Mathf.Max(zone.cornerA.position.z, zone.cornerB.position.z);
 
-        float spawnY = zone.cornerA.position.y; 
+        Vector3 spawnPosition = new Vector3(Random.Range(minX, maxX), zone.cornerA.position.y, Random.Range(minZ, maxZ));
 
-        Vector3 spawnPosition = new Vector3(Random.Range(minX, maxX), spawnY, Random.Range(minZ, maxZ));
+        GameObject newZombie = Instantiate(zombiePrefab, spawnPosition, Quaternion.identity);
+        Transform closerTarget = GetCloserTarget(spawnPosition);
 
-        Instantiate(zombiePrefab, spawnPosition, Quaternion.identity);
+        ZombieAI aiScript = newZombie.GetComponent<ZombieAI>();
+        if (aiScript != null)
+        {
+            aiScript.SetTarget(closerTarget);
+        }
+    }
+
+    private Transform GetCloserTarget(Vector3 position)
+    {
+        float distA = (position - targetA.position).sqrMagnitude;
+        float distB = (position - targetB.position).sqrMagnitude;
+
+        return distA < distB ? targetA : targetB;
     }
 }
