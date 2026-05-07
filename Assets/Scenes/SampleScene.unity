@@ -3694,7 +3694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnZombies
   timeBetweenSpawns: 2
-  zombiePrefab: {fileID: 3265037317432396975, guid: 67852031a4d0f4496a4ae3c8ee288169, type: 3}
+  zombiePrefab: {fileID: 2261795301874020217, guid: a5236b14485c84713bb587512cbf3824, type: 3}
   targetA: {fileID: 295422888}
   targetB: {fileID: 11684647}
   spawnZones:
