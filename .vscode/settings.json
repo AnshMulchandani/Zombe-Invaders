@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Zombe-Invaders.slnx",
+    "dotnet.defaultSolution": "Full_Body_Project.slnx",
     "dotnet.enableWorkspaceBasedDevelopment": false
 }
