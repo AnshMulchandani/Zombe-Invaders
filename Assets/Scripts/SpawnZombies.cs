@@ -5,9 +5,13 @@ using System.Collections.Generic;
 public class SpawnZombies : MonoBehaviour
 {
     public float timeBetweenSpawns = 2f; 
+    public float delayBetweenRounds = 5f;
+    public int[] zombiesPerRound = new int[5] { 5, 10, 15, 20, 25 }; 
+
     public GameObject zombiePrefab;
-    public Transform targetA;
-    public Transform targetB;
+    public Tower targetA;
+    public Tower targetB;
+    public FireBehaviour[] players;
 
     [System.Serializable] 
     public class SpawnZone
@@ -19,21 +23,61 @@ public class SpawnZombies : MonoBehaviour
 
     public List<SpawnZone> spawnZones; 
 
+    private int currentRound = 0;
+    private bool isSpawningRound = false;
+    private bool isGameOver = false;
+    
+    private List<ZombieAI> activeZombies = new List<ZombieAI>();
+
     void Start()
     {
         if (spawnZones.Count > 0)
         {
-            StartCoroutine(SpawnRoutine());
+            StartCoroutine(StartNextRound());
+        }
+    }
+
+    void Update()
+    {
+        if (isGameOver) return;
+
+        CheckLossCondition();
+
+        if (isGameOver) return;
+
+        activeZombies.RemoveAll(zombie => zombie == null || zombie.IsDead);
+
+        if (!isSpawningRound && activeZombies.Count == 0)
+        {
+            currentRound++;
+
+            if (currentRound >= zombiesPerRound.Length) 
+            {
+                WinGame();
+            }
+            else
+            {
+                StartCoroutine(StartNextRound());
+            }
         }
     }
     
-    private IEnumerator SpawnRoutine()
+    private IEnumerator StartNextRound()
     {
-        while (true)
+        isSpawningRound = true;
+
+        yield return new WaitForSeconds(delayBetweenRounds);
+
+        int zombiesToSpawn = zombiesPerRound[currentRound];
+        for (int i = 0; i < zombiesToSpawn; i++)
         {
-            yield return new WaitForSeconds(timeBetweenSpawns);
+            if (isGameOver) yield break;
+
             SpawnZombie();
+            yield return new WaitForSeconds(timeBetweenSpawns);
         }
+
+        isSpawningRound = false;
     }
 
     public void SpawnZombie()
@@ -49,20 +93,73 @@ public class SpawnZombies : MonoBehaviour
         Vector3 spawnPosition = new Vector3(Random.Range(minX, maxX), zone.cornerA.position.y, Random.Range(minZ, maxZ));
 
         GameObject newZombie = Instantiate(zombiePrefab, spawnPosition, Quaternion.identity);
-        Transform closerTarget = GetCloserTarget(spawnPosition);
-
         ZombieAI aiScript = newZombie.GetComponent<ZombieAI>();
+        
         if (aiScript != null)
         {
-            aiScript.SetTarget(closerTarget);
+            activeZombies.Add(aiScript);
+            
+            Transform closerTarget = GetCloserAliveTarget(spawnPosition);
+            if (closerTarget != null)
+            {
+                aiScript.SetTarget(closerTarget);
+            }
         }
     }
 
-    private Transform GetCloserTarget(Vector3 position)
+    private Transform GetCloserAliveTarget(Vector3 position)
     {
-        float distA = (position - targetA.position).sqrMagnitude;
-        float distB = (position - targetB.position).sqrMagnitude;
+        bool aAlive = targetA != null && targetA.gameObject.activeInHierarchy;
+        bool bAlive = targetB != null && targetB.gameObject.activeInHierarchy;
 
-        return distA < distB ? targetA : targetB;
+        if (aAlive && bAlive)
+        {
+            float distA = (position - targetA.transform.position).sqrMagnitude;
+            float distB = (position - targetB.transform.position).sqrMagnitude;
+            return distA < distB ? targetA.transform : targetB.transform;
+        }
+        else if (aAlive)
+        {
+            return targetA.transform;
+        }
+        else if (bAlive)
+        {
+            return targetB.transform;
+        }
+
+        return null; 
+    }
+
+    private void CheckLossCondition()
+    {
+        bool aAlive = targetA != null && targetA.gameObject.activeInHierarchy;
+        bool bAlive = targetB != null && targetB.gameObject.activeInHierarchy;
+
+        if (!aAlive && !bAlive)
+        {
+            isGameOver = true;
+        }
+    }
+
+    private void WinGame()
+    {
+        isGameOver = true;
+
+        FireBehaviour winner = null;
+        int highestScore = -1;
+
+        foreach (FireBehaviour player in players)
+        {
+            if (player != null && player.playerScore > highestScore)
+            {
+                highestScore = player.playerScore;
+                winner = player;
+            }
+        }
+
+        if (winner != null)
+        {
+            Debug.Log($"WINNER: {winner.gameObject.name} won with {highestScore} points!");
+        }
     }
 }
