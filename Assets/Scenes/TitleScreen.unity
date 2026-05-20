@@ -475,15 +475,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2515705834275592340, guid: 8518085896b53be49b1eedb4c15d53c2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.17364809
       objectReference: {fileID: 0}
     - target: {fileID: 2515705834275592340, guid: 8518085896b53be49b1eedb4c15d53c2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -1
+      value: -0.9848078
       objectReference: {fileID: 0}
     - target: {fileID: 2515705834275592340, guid: 8518085896b53be49b1eedb4c15d53c2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 180
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 2515705834275592340, guid: 8518085896b53be49b1eedb4c15d53c2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -27305,7 +27305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TrackingManager
   calibrationUI: {fileID: 1617348789}
   trackingInterface: {fileID: 1617348787}
-  enableTracking: 0
+  enableTracking: 1
   numberOfPlayers: 2
   numberOfBaseStations: 2
   enableRotation: 0
