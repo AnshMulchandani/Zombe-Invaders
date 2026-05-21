@@ -459,7 +459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2515705834275592340, guid: 8518085896b53be49b1eedb4c15d53c2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2515705834275592340, guid: 8518085896b53be49b1eedb4c15d53c2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -543,9 +543,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2515705834275095732, guid: 8518085896b53be49b1eedb4c15d53c2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 138306111}
-    - targetCorrespondingSourceObject: {fileID: 2515705834275095732, guid: 8518085896b53be49b1eedb4c15d53c2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 138306113}
   m_SourcePrefab: {fileID: 100100000, guid: 8518085896b53be49b1eedb4c15d53c2, type: 3}
 --- !u!1001 &26344885
 PrefabInstance:
@@ -1396,33 +1393,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cead0f3c890e624490b71f3cf75d4a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StartButton
---- !u!54 &138306113
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 138306109}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 14
-  m_CollisionDetection: 0
 --- !u!1001 &145661484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15919,6 +15889,7 @@ GameObject:
   - component: {fileID: 1117102442}
   - component: {fileID: 1117102441}
   - component: {fileID: 1117102445}
+  - component: {fileID: 1117102446}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -15975,8 +15946,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5, y: 1, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 5, y: 1.2255487, z: 5.36821}
+  m_Center: {x: 0, y: 0.005891323, z: 0.06265068}
 --- !u!23 &1117102443
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16048,6 +16019,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FireBehaviour
   playerScore: 0
   pointsPerKill: 10
+--- !u!54 &1117102446
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1117102439}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1117873074
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20534,6 +20532,7 @@ GameObject:
   - component: {fileID: 1455975011}
   - component: {fileID: 1455975010}
   - component: {fileID: 1455975015}
+  - component: {fileID: 1455975016}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player
@@ -20574,8 +20573,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5, y: 1, z: 5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 5, y: 1.2255487, z: 5.36821}
+  m_Center: {x: 0, y: 0.005891323, z: 0.06265068}
 --- !u!23 &1455975012
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -20663,6 +20662,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FireBehaviour
   playerScore: 0
   pointsPerKill: 10
+--- !u!54 &1455975016
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455975009}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1457428720
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27335,7 +27361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TrackingManager
   calibrationUI: {fileID: 1617348789}
   trackingInterface: {fileID: 1617348787}
-  enableTracking: 1
+  enableTracking: 0
   numberOfPlayers: 2
   numberOfBaseStations: 2
   enableRotation: 0
