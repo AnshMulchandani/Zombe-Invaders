@@ -9,6 +9,7 @@ TagManager:
   - Other
   - Enemy
   - Tower
+  - Grenade
   layers:
   - Default
   - TransparentFX

@@ -12,8 +12,9 @@ public class FireBehaviour : MonoBehaviour
     private float cooldownTimer = 0f;
 
     private List<GameObject> enemiesInRange = new List<GameObject>();
+    private List<GameObject> grenadesInRange = new List<GameObject>(); 
+    
     public int playerScore = 0;
-    public int pointsPerKill = 10;
 
     void Start()
     {
@@ -52,11 +53,32 @@ public class FireBehaviour : MonoBehaviour
 
     private void TriggerShootingMechanic()
     {
+        grenadesInRange.RemoveAll(grenade => grenade == null);
         enemiesInRange.RemoveAll(enemy => enemy == null);
+
+        if (grenadesInRange.Count > 0)
+        {
+            GameObject targetGrenade = GetClosestObject(grenadesInRange);
+
+            if (targetGrenade != null)
+            {
+                cooldownTimer = cooldown;
+
+                Explosion grenadeScript = targetGrenade.GetComponentInChildren<Explosion>();
+                if (grenadeScript != null)
+                {
+                    playerScore += grenadeScript.detonate();
+                }
+
+                grenadesInRange.Remove(targetGrenade);
+                Destroy(targetGrenade);
+                return; 
+            }
+        }
 
         if (enemiesInRange.Count > 0)
         {
-            GameObject targetEnemy = GetClosestEnemy();
+            GameObject targetEnemy = GetClosestObject(enemiesInRange);
 
             if (targetEnemy != null)
             {
@@ -67,7 +89,7 @@ public class FireBehaviour : MonoBehaviour
                 if (enemyScript != null && !enemyScript.IsDead)
                 {
                     enemyScript.KillEnemy();
-                    playerScore += pointsPerKill;
+                    playerScore += enemyScript.pointsPerKill; 
                 }
                 
                 enemiesInRange.Remove(targetEnemy);
@@ -75,24 +97,24 @@ public class FireBehaviour : MonoBehaviour
         }
     }
 
-    private GameObject GetClosestEnemy()
+    private GameObject GetClosestObject(List<GameObject> targetList)
     {
         GameObject closest = null;
         float minDistance = Mathf.Infinity;
         Vector3 playerPosition = transform.position;
 
-        foreach (GameObject enemy in enemiesInRange)
+        foreach (GameObject obj in targetList)
         {
-            if (enemy != null)
+            if (obj != null)
             {
-                ZombieAI enemyScript = enemy.GetComponent<ZombieAI>();
+                ZombieAI enemyScript = obj.GetComponent<ZombieAI>();
                 if (enemyScript != null && enemyScript.IsDead) continue;
 
-                float distance = Vector3.Distance(enemy.transform.position, playerPosition);
+                float distance = Vector3.Distance(obj.transform.position, playerPosition);
                 if (distance < minDistance)
                 {
                     minDistance = distance;
-                    closest = enemy;
+                    closest = obj;
                 }
             }
         }
@@ -113,6 +135,13 @@ public class FireBehaviour : MonoBehaviour
                 enemiesInRange.Add(other.gameObject);
             }
         }
+        else if (other.CompareTag("Grenade"))
+        {
+            if (!grenadesInRange.Contains(other.gameObject))
+            {
+                grenadesInRange.Add(other.gameObject);
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -120,6 +149,10 @@ public class FireBehaviour : MonoBehaviour
         if (other.CompareTag("Enemy") || other.gameObject.tag == "Untagged")
         {
             enemiesInRange.Remove(other.gameObject);
+        }
+        else if (other.CompareTag("Grenade"))
+        {
+            grenadesInRange.Remove(other.gameObject);
         }
     }
 }

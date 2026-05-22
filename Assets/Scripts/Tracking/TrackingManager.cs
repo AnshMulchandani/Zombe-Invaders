@@ -224,16 +224,13 @@ public class TrackingManager : MonoBehaviour
     private void Update()
     {
         ListenToControls();
-        Debug.Log("AAAAA");
         //if tracking is not enabled move players with keyboard
         if (!enableTracking)
         {
             DisabledTrackingPlayerSelector();
 
             DisabledTrackingPlayerMovement();
-            Debug.Log("TRACKING DISABLED");
         }
-        Debug.Log("BBBB");
     }
 
     /// <summary>

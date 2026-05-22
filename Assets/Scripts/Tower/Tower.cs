@@ -5,9 +5,16 @@ public class Tower : MonoBehaviour
     public float maxHealth = 500f;
     public float currentHealth;
 
+    public TowerHealth healthBar;
+
     void Start()
     {
         currentHealth = maxHealth;
+
+        if (healthBar != null)
+        {
+            healthBar.SetMaxHealth(maxHealth);
+        }
     }
 
     public void TakeDamage(float amount)
@@ -15,7 +22,14 @@ public class Tower : MonoBehaviour
         if (currentHealth <= 0) return;
 
         currentHealth -= amount;
-        Debug.Log($"{gameObject.name} took {amount} damage! Current Health: {currentHealth}");
+        
+        currentHealth = Mathf.Max(currentHealth, 0);
+
+
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(currentHealth);
+        }
 
         if (currentHealth <= 0)
         {
@@ -24,9 +38,7 @@ public class Tower : MonoBehaviour
     }
 
     private void TowerDestroyed()
-    {
-        Debug.Log($"{gameObject.name} has fallen!");
-        
+    {        
         gameObject.SetActive(false); 
     }
 }

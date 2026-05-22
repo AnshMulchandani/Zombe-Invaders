@@ -27,7 +27,7 @@ public class SpawnZombies : MonoBehaviour
 
     private int currentRound = 0;
     private bool isSpawningRound = false;
-    private bool isGameOver = false;
+    public bool isGameOver = false;
     
     private List<ZombieAI> activeZombies = new List<ZombieAI>();
 
@@ -106,7 +106,7 @@ public class SpawnZombies : MonoBehaviour
         float minZ = Mathf.Min(zone.cornerA.position.z, zone.cornerB.position.z);
         float maxZ = Mathf.Max(zone.cornerA.position.z, zone.cornerB.position.z);
 
-        Vector3 spawnPosition = new Vector3(Random.Range(minX, maxX), zone.cornerA.position.y, Random.Range(minZ, maxZ));
+        Vector3 spawnPosition = new Vector3(Random.Range(minX, maxX), zone.cornerA.position.y+5, Random.Range(minZ, maxZ));
 
         GameObject newZombie = Instantiate(zombiePrefab, spawnPosition, Quaternion.identity);
         Transform closerTarget = GetCloserTarget(spawnPosition);
@@ -154,7 +154,6 @@ public class SpawnZombies : MonoBehaviour
         {
             isGameOver = true;
             GameLost = true;
-            Debug.Log("GAME OVER: Both towers have fallen!");
         }
     }
 
@@ -193,7 +192,6 @@ public class SpawnZombies : MonoBehaviour
         }
         else if (winner != null)
         {
-            // Formats the text based on the GameObject's name, e.g., "PLAYER 1 WINS"
             WinnerText = $"{winner.gameObject.name.ToUpper()} WINS";
         }
     }

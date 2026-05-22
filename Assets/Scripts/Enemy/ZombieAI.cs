@@ -9,6 +9,9 @@ public class ZombieAI : MonoBehaviour
     public float attackRange = 2.5f;
     public float damagePerAttack = 15f;
     public float attackCooldown = 1.2f;
+    
+    public int pointsPerKill = 10; 
+    
     private string attackBoolName = "IsAttacking";
 
     private Animator animator;
