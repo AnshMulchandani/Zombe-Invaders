@@ -8,20 +8,15 @@ public class SpawnZombies : MonoBehaviour
     public float delayBetweenRounds = 5f;
     public int[] rounds = new int[] { 5, 10, 15, 20, 25 }; 
 
-    [Header("Zombie Prefabs")]
     public GameObject zombiePrefab;
     public GameObject goldenZombiePrefab; // Added: Slot for the golden zombie variant
     
-    [Range(0f, 1f)]
     public float goldenZombieChance = 0.15f; // Added: 0.15 means a 15% chance to spawn
 
-    [Header("Targets")]
     public Transform targetA;
     public Transform targetB;
     
     public FireBehaviour[] players;
-
-    [System.Serializable] 
     public class SpawnZone
     {
         public string name;

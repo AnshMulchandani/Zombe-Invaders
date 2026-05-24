@@ -54,6 +54,10 @@ public class FireBehaviour : MonoBehaviour
 
     private void TriggerShootingMechanic()
     {
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlayShootSound();
+        }
         grenadesInRange.RemoveAll(grenade => grenade == null);
         shieldsInRange.RemoveAll(shield => shield == null);
         enemiesInRange.RemoveAll(enemy => enemy == null);

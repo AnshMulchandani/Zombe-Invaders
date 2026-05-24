@@ -166,7 +166,10 @@ public class ZombieAI : MonoBehaviour
             animator.SetBool(attackBoolName, false);
             animator.SetTrigger(deathTriggerName);
         }
-
+        if (SoundManager.Instance != null && SoundManager.Instance.DyingSound != null)
+        {
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.DyingSound);
+        }
         Destroy(gameObject, despawnDelay);
     }
 }

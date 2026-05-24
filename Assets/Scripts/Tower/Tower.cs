@@ -88,6 +88,10 @@ public class Tower : MonoBehaviour
     private void TowerDestroyed()
     {
         Debug.Log($"{gameObject.name} has fallen!");
+        if (SoundManager.Instance != null && SoundManager.Instance.destroyTowerSound != null)
+        {
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.destroyTowerSound);
+        }
         gameObject.SetActive(false); 
     }
 }
