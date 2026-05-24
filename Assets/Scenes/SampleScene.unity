@@ -17215,6 +17215,56 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4728181223975587749, guid: 50d1bdeeb3ba5454286e5af49106db16, type: 3}
   m_PrefabInstance: {fileID: 1060487206}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1062888981
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1062888982}
+  - component: {fileID: 1062888983}
+  m_Layer: 0
+  m_Name: Sound Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1062888982
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062888981}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1084422752}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1062888983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062888981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61c9a30349fa8485987364176a764f8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SoundManager
+  sfxSource: {fileID: 0}
+  shootSound: {fileID: 8300000, guid: 6581077883ddd45edbb5e5625b5da462, type: 3}
+  explosionSound: {fileID: 0}
+  shieldSound: {fileID: 0}
+  destroyTowerSound: {fileID: 8300000, guid: 9698ba1610baf41a7b52ba43e3bed81c, type: 3}
+  DyingSound: {fileID: 8300000, guid: 2360dd6ae519240e4af800e1712e024b, type: 3}
 --- !u!1001 &1073659601
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17379,19 +17429,6 @@ MonoBehaviour:
   players:
   - {fileID: 1117102445}
   - {fileID: 1455975015}
-  spawnZones:
-  - name: Spawn1
-    cornerA: {fileID: 1875296302}
-    cornerB: {fileID: 1459210945}
-  - name: Spawn2
-    cornerA: {fileID: 378463319}
-    cornerB: {fileID: 316435355}
-  - name: Spawn3
-    cornerA: {fileID: 607368869}
-    cornerB: {fileID: 728591181}
-  - name: Spawn4
-    cornerA: {fileID: 1695296349}
-    cornerB: {fileID: 1951940665}
   isGameOver: 0
 --- !u!4 &1075439886
 Transform:
@@ -17414,6 +17451,38 @@ Transform:
   - {fileID: 607368869}
   - {fileID: 1951940665}
   - {fileID: 1695296349}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1084422751
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1084422752}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1084422752
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084422751}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1062888982}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1085868928
@@ -32916,3 +32985,4 @@ SceneRoots:
   - {fileID: 733735077}
   - {fileID: 929207045338632138}
   - {fileID: 7401731424873564100}
+  - {fileID: 1084422752}
