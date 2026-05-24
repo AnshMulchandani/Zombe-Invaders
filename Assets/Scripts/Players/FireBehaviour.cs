@@ -13,6 +13,7 @@ public class FireBehaviour : MonoBehaviour
 
     private List<GameObject> enemiesInRange = new List<GameObject>();
     private List<GameObject> grenadesInRange = new List<GameObject>(); 
+    private List<GameObject> shieldsInRange = new List<GameObject>(); 
     
     public int playerScore = 0;
 
@@ -54,24 +55,52 @@ public class FireBehaviour : MonoBehaviour
     private void TriggerShootingMechanic()
     {
         grenadesInRange.RemoveAll(grenade => grenade == null);
+        shieldsInRange.RemoveAll(shield => shield == null);
         enemiesInRange.RemoveAll(enemy => enemy == null);
 
-        if (grenadesInRange.Count > 0)
+        if (grenadesInRange.Count > 0 || shieldsInRange.Count > 0)
         {
             GameObject targetGrenade = GetClosestObject(grenadesInRange);
+            GameObject targetShield = GetClosestObject(shieldsInRange);
 
-            if (targetGrenade != null)
+            GameObject targetItem = null;
+            bool isGrenade = false;
+
+            if (targetGrenade != null && targetShield != null)
+            {
+                float distG = Vector3.Distance(transform.position, targetGrenade.transform.position);
+                float distS = Vector3.Distance(transform.position, targetShield.transform.position);
+                if (distG < distS) { targetItem = targetGrenade; isGrenade = true; }
+                else { targetItem = targetShield; isGrenade = false; }
+            }
+            else if (targetGrenade != null) { targetItem = targetGrenade; isGrenade = true; }
+            else if (targetShield != null) { targetItem = targetShield; isGrenade = false; }
+
+            if (targetItem != null)
             {
                 cooldownTimer = cooldown;
 
-                Explosion grenadeScript = targetGrenade.GetComponentInChildren<Explosion>();
-                if (grenadeScript != null)
+                if (isGrenade)
                 {
-                    playerScore += grenadeScript.detonate();
+                    Explosion grenadeScript = targetItem.GetComponentInChildren<Explosion>();
+                    if (grenadeScript != null)
+                    {
+                        playerScore += grenadeScript.detonate();
+                    }
+                    grenadesInRange.Remove(targetItem);
+                }
+                else
+                {
+                    Shield shieldScript = targetItem.GetComponent<Shield>();
+                    if (shieldScript != null)
+                    {
+                        playerScore += 5;
+                        shieldScript.ActivateShield(); 
+                    }
+                    shieldsInRange.Remove(targetItem);
                 }
 
-                grenadesInRange.Remove(targetGrenade);
-                Destroy(targetGrenade);
+                Destroy(targetItem);
                 return; 
             }
         }
@@ -97,13 +126,13 @@ public class FireBehaviour : MonoBehaviour
         }
     }
 
-    private GameObject GetClosestObject(List<GameObject> targetList)
+    private GameObject GetClosestObject(List<GameObject> listToSearch)
     {
         GameObject closest = null;
         float minDistance = Mathf.Infinity;
         Vector3 playerPosition = transform.position;
 
-        foreach (GameObject obj in targetList)
+        foreach (GameObject obj in listToSearch)
         {
             if (obj != null)
             {
@@ -127,7 +156,6 @@ public class FireBehaviour : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             ZombieAI enemyScript = other.GetComponent<ZombieAI>();
-            
             if (enemyScript != null && enemyScript.IsDead) return;
 
             if (!enemiesInRange.Contains(other.gameObject))
@@ -142,6 +170,13 @@ public class FireBehaviour : MonoBehaviour
                 grenadesInRange.Add(other.gameObject);
             }
         }
+        else if (other.CompareTag("Shield")) 
+        {
+            if (!shieldsInRange.Contains(other.gameObject))
+            {
+                shieldsInRange.Add(other.gameObject);
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -153,6 +188,10 @@ public class FireBehaviour : MonoBehaviour
         else if (other.CompareTag("Grenade"))
         {
             grenadesInRange.Remove(other.gameObject);
+        }
+        else if (other.CompareTag("Shield"))
+        {
+            shieldsInRange.Remove(other.gameObject);
         }
     }
 }

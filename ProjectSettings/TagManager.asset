@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Tower
   - Grenade
+  - Shield
   layers:
   - Default
   - TransparentFX

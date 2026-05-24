@@ -8,8 +8,14 @@ public class SpawnZombies : MonoBehaviour
     public float delayBetweenRounds = 5f;
     public int[] rounds = new int[] { 5, 10, 15, 20, 25 }; 
 
+    [Header("Zombie Prefabs")]
     public GameObject zombiePrefab;
+    public GameObject goldenZombiePrefab; // Added: Slot for the golden zombie variant
     
+    [Range(0f, 1f)]
+    public float goldenZombieChance = 0.15f; // Added: 0.15 means a 15% chance to spawn
+
+    [Header("Targets")]
     public Transform targetA;
     public Transform targetB;
     
@@ -108,7 +114,19 @@ public class SpawnZombies : MonoBehaviour
 
         Vector3 spawnPosition = new Vector3(Random.Range(minX, maxX), zone.cornerA.position.y+5, Random.Range(minZ, maxZ));
 
-        GameObject newZombie = Instantiate(zombiePrefab, spawnPosition, Quaternion.identity);
+        // --- NEW VARIANT SELECTION LOGIC ---
+        GameObject prefabToSpawn = zombiePrefab;
+
+        // Roll a random number between 0.0 and 1.0. If it falls below our chance threshold, pick the golden zombie.
+        if (goldenZombiePrefab != null && Random.value < goldenZombieChance)
+        {
+            prefabToSpawn = goldenZombiePrefab;
+        }
+
+        // Instantiate whichever prefab won the roll
+        GameObject newZombie = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+        // ------------------------------------
+
         Transform closerTarget = GetCloserTarget(spawnPosition);
 
         ZombieAI aiScript = newZombie.GetComponent<ZombieAI>();
