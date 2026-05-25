@@ -20,6 +20,10 @@ public class Explosion : MonoBehaviour
                 }
             }
         }
+        if (SoundManager.Instance != null && SoundManager.Instance.explosionSound!= null)
+        {
+            SoundManager.Instance.PlaySFX(SoundManager.Instance.explosionSound);
+        }
         return score;
     }
     private void OnTriggerEnter(Collider other)
