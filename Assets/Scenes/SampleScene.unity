@@ -17429,6 +17429,19 @@ MonoBehaviour:
   players:
   - {fileID: 1117102445}
   - {fileID: 1455975015}
+  spawnZones:
+  - name: 
+    cornerA: {fileID: 1875296302}
+    cornerB: {fileID: 1459210945}
+  - name: 
+    cornerA: {fileID: 378463319}
+    cornerB: {fileID: 316435355}
+  - name: 
+    cornerA: {fileID: 607368869}
+    cornerB: {fileID: 728591181}
+  - name: 
+    cornerA: {fileID: 1695296349}
+    cornerB: {fileID: 1695296349}
   isGameOver: 0
 --- !u!4 &1075439886
 Transform:

@@ -10,13 +10,14 @@ public class SpawnZombies : MonoBehaviour
 
     public GameObject zombiePrefab;
     public GameObject goldenZombiePrefab; // Added: Slot for the golden zombie variant
-    
+    [Range(0f, 1f)]
     public float goldenZombieChance = 0.15f; // Added: 0.15 means a 15% chance to spawn
 
     public Transform targetA;
     public Transform targetB;
     
     public FireBehaviour[] players;
+    [System.Serializable] 
     public class SpawnZone
     {
         public string name;
