@@ -363,6 +363,8 @@ MonoBehaviour:
   damagePerAttack: 15
   attackCooldown: 1.2
   pointsPerKill: 30
+  Explosion: {fileID: 100006, guid: 2a474af3f4c27be4e9bdce39cfe4315d, type: 3}
+  explosionScale: 2
 --- !u!195 &-3583176551334411781
 NavMeshAgent:
   m_ObjectHideFlags: 0

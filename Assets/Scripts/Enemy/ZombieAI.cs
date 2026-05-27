@@ -23,6 +23,8 @@ public class ZombieAI : MonoBehaviour
     private bool isDead = false;
 
     public bool IsDead => isDead;
+    public GameObject Explosion;
+    public float explosionScale;
 
     void Awake()
     {
@@ -159,6 +161,12 @@ public class ZombieAI : MonoBehaviour
         if (enemyCollider != null)
         {
             enemyCollider.enabled = false;
+        }
+
+        if(Explosion != null)
+        {
+            GameObject e = Instantiate(Explosion, transform.position, Quaternion.identity);
+            e.transform.localScale = Vector3.one * explosionScale;
         }
 
         if (animator != null)
