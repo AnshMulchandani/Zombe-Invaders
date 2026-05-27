@@ -11957,7 +11957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemSpawner
   gameManager: {fileID: 1075439885}
-  globalSpawnChancePerSecond: 5
+  globalSpawnChancePerSecond: 10
   spawnableItems:
   - name: Grenade
     itemPrefab: {fileID: 672221598587852062, guid: e3900e77011e243958fe64dce0672389, type: 3}

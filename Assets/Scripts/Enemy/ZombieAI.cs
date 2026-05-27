@@ -155,7 +155,7 @@ public class ZombieAI : MonoBehaviour
             agent.isStopped = true;
             agent.enabled = false;
         }
-
+        transform.position = new Vector3(transform.position.x, transform.position.y + 5f, transform.position.z);
         gameObject.tag = "Untagged";
 
         if (enemyCollider != null)
