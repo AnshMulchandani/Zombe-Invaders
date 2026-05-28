@@ -16624,6 +16624,12 @@ MonoBehaviour:
   currentShield: 0
   healthBar: {fileID: 604019879}
   shieldBar: {fileID: 1844069567}
+  explosionPrefab: {fileID: 1134129239631916, guid: 7e48ba6b1b968764490bbc70b66e3fe1, type: 3}
+  hitDebrisPrefab: {fileID: 1040608886635896, guid: a97415c6b57076f41a6621a7b51d63a3, type: 3}
+  explosionScale: 4
+  hitDebrisScale: 2
+  explosionHeightOffset: 1.5
+  hitDebrisHeightOffset: 1
 --- !u!1001 &1015926145
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17279,13 +17285,13 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.387
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 38
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -21958,6 +21964,12 @@ MonoBehaviour:
   currentShield: 0
   healthBar: {fileID: 460257886}
   shieldBar: {fileID: 1552923670}
+  explosionPrefab: {fileID: 1134129239631916, guid: 7e48ba6b1b968764490bbc70b66e3fe1, type: 3}
+  hitDebrisPrefab: {fileID: 1040608886635896, guid: a97415c6b57076f41a6621a7b51d63a3, type: 3}
+  explosionScale: 4
+  hitDebrisScale: 2
+  explosionHeightOffset: 1.5
+  hitDebrisHeightOffset: 1
 --- !u!1 &1350247345
 GameObject:
   m_ObjectHideFlags: 0
