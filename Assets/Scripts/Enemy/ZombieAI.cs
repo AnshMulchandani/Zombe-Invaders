@@ -23,8 +23,9 @@ public class ZombieAI : MonoBehaviour
     private bool isDead = false;
 
     public bool IsDead => isDead;
+
     public GameObject Explosion;
-    public float explosionScale;
+    public float explosionScale = 1f;
 
     void Awake()
     {
@@ -39,6 +40,7 @@ public class ZombieAI : MonoBehaviour
         {
             agent.stoppingDistance = attackRange - 0.2f;
         }
+
         FindClosestTower();
     }
 
@@ -132,8 +134,16 @@ public class ZombieAI : MonoBehaviour
         else
         {
             targetTowerHealth = null;
-            if (agent != null && agent.isOnNavMesh) agent.isStopped = true;
-            if (animator != null) animator.SetBool(attackBoolName, false);
+
+            if (agent != null && agent.isOnNavMesh)
+            {
+                agent.isStopped = true;
+            }
+
+            if (animator != null)
+            {
+                animator.SetBool(attackBoolName, false);
+            }
         }
     }
 
@@ -155,7 +165,7 @@ public class ZombieAI : MonoBehaviour
             agent.isStopped = true;
             agent.enabled = false;
         }
-        transform.position = new Vector3(transform.position.x, transform.position.y + 5f, transform.position.z);
+
         gameObject.tag = "Untagged";
 
         if (enemyCollider != null)
@@ -163,21 +173,28 @@ public class ZombieAI : MonoBehaviour
             enemyCollider.enabled = false;
         }
 
-        if(Explosion != null)
-        {
-            GameObject e = Instantiate(Explosion, transform.position, Quaternion.identity);
-            e.transform.localScale = Vector3.one * explosionScale;
-        }
-
         if (animator != null)
         {
             animator.SetBool(attackBoolName, false);
             animator.SetTrigger(deathTriggerName);
         }
+
         if (SoundManager.Instance != null && SoundManager.Instance.DyingSound != null)
         {
             SoundManager.Instance.PlaySFX(SoundManager.Instance.DyingSound);
         }
-        Destroy(gameObject, despawnDelay);
+
+        Invoke(nameof(ExplodeAndDisappear), despawnDelay);
+    }
+
+    private void ExplodeAndDisappear()
+    {
+        if (Explosion != null)
+        {
+            GameObject e = Instantiate(Explosion, transform.position, Quaternion.identity);
+            e.transform.localScale = Vector3.one * explosionScale;
+        }
+
+        Destroy(gameObject);
     }
 }
