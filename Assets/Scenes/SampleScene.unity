@@ -33020,6 +33020,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3776144687165156064, guid: e3900e77011e243958fe64dce0672389, type: 3}
+      propertyPath: explosionVFX
+      value: 
+      objectReference: {fileID: 1134129239631916, guid: 7e48ba6b1b968764490bbc70b66e3fe1, type: 3}
+    - target: {fileID: 3776144687165156064, guid: e3900e77011e243958fe64dce0672389, type: 3}
+      propertyPath: explosionScale
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
