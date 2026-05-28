@@ -19,7 +19,7 @@ public class FireBehaviour : MonoBehaviour
 
     void Start()
     {
-        lastCheckedY = transform.position.y;
+        lastCheckedY = transform.localPosition.y;
     }
 
     void Update()
@@ -38,10 +38,12 @@ public class FireBehaviour : MonoBehaviour
 
         if (gestureTimer >= gestureCheckInterval)
         {
-            float currentY = transform.position.y;
+            // Track localPosition instead of world position
+            float currentY = transform.localPosition.y;
             float yDelta = currentY - lastCheckedY;
             float verticalVelocity = yDelta / gestureTimer;
 
+            // If it still misfires, try changing downwardSpeedThreshold from 2.5f to 4.0f
             if (verticalVelocity < -downwardSpeedThreshold && cooldownTimer <= 0)
             {
                 TriggerShootingMechanic();
