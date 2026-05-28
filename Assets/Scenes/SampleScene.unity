@@ -17266,7 +17266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c9a30349fa8485987364176a764f8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
-  sfxSource: {fileID: 0}
+  sfxSource: {fileID: 1062888984}
   shootSound: {fileID: 8300000, guid: 6581077883ddd45edbb5e5625b5da462, type: 3}
   explosionSound: {fileID: 8300000, guid: 2627855370a0d4eb881b68ba00008757, type: 3}
   shieldSound: {fileID: 8300000, guid: 83534381fe41c428d94b722be9f3393f, type: 3}
