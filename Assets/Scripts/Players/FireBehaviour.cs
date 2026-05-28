@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FireBehaviour : MonoBehaviour
 {
-    private float downwardSpeedThreshold = 5.5f;
+    private float downwardSpeedThreshold = 20f;
     private float gestureCheckInterval = 0.05f;
     private float cooldown = 0.5f;
 
@@ -56,6 +56,7 @@ public class FireBehaviour : MonoBehaviour
 
     private void TriggerShootingMechanic()
     {
+        cooldownTimer = cooldown;
         if (SoundManager.Instance != null)
         {
             SoundManager.Instance.PlayShootSound();
