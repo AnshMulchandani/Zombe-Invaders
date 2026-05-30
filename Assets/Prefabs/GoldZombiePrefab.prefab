@@ -365,6 +365,8 @@ MonoBehaviour:
   pointsPerKill: 30
   Explosion: {fileID: 100006, guid: 2a474af3f4c27be4e9bdce39cfe4315d, type: 3}
   explosionScale: 2
+  walkingParticlesPrefab: {fileID: 1727626132299242, guid: b0bc1b6b391734647b9bb142bafc0819, type: 3}
+  walkingParticlesScale: 0.7
 --- !u!195 &-3583176551334411781
 NavMeshAgent:
   m_ObjectHideFlags: 0

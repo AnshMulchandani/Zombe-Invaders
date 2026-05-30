@@ -26,6 +26,10 @@ public class ZombieAI : MonoBehaviour
 
     public GameObject Explosion;
     public float explosionScale = 1f;
+    public GameObject walkingParticlesPrefab; 
+    public float walkingParticlesScale = 1f;  
+
+    private GameObject walkingParticlesInstance;
 
     void Awake()
     {
@@ -42,6 +46,8 @@ public class ZombieAI : MonoBehaviour
         }
 
         FindClosestTower();
+
+        StartWalkingParticles();
     }
 
     public void SetTarget(Transform target)
@@ -155,16 +161,41 @@ public class ZombieAI : MonoBehaviour
         }
     }
 
+    private void StartWalkingParticles()
+    {
+        if (walkingParticlesPrefab == null) return;
+
+        walkingParticlesInstance = Instantiate(
+            walkingParticlesPrefab,
+            transform.position,
+            transform.rotation * Quaternion.Euler(90f, 0f, 0f),
+            transform
+        );
+
+        walkingParticlesInstance.transform.localScale = Vector3.one * walkingParticlesScale;
+    }
+
+    private void StopWalkingParticles()
+    {
+        if (walkingParticlesInstance != null)
+        {
+            Destroy(walkingParticlesInstance);
+        }
+    }
+
     public void KillEnemy()
     {
         if (isDead) return; 
         isDead = true;
+
+        StopWalkingParticles();
 
         if (agent != null && agent.isOnNavMesh)
         {
             agent.isStopped = true;
             agent.enabled = false;
         }
+
         transform.position = new Vector3(transform.position.x, transform.position.y + 5f, transform.position.z);
         gameObject.tag = "Untagged";
 
