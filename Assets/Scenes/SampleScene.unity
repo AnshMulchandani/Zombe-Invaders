@@ -1218,7 +1218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 106532639841046518, guid: e30b970dce9a2624abcd141f481e6f28, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.2
+      value: 3.8
       objectReference: {fileID: 0}
     - target: {fileID: 106532639841046518, guid: e30b970dce9a2624abcd141f481e6f28, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12028,7 +12028,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemSpawner
   gameManager: {fileID: 1075439885}
-  globalSpawnChancePerSecond: 10
+  globalSpawnChancePerSecond: 5
   spawnableItems:
   - name: Grenade
     itemPrefab: {fileID: 672221598587852062, guid: e3900e77011e243958fe64dce0672389, type: 3}
@@ -17598,7 +17598,7 @@ MonoBehaviour:
   rounds: 050000000a0000000f0000001400000019000000
   zombiePrefab: {fileID: 2261795301874020217, guid: a5236b14485c84713bb587512cbf3824, type: 3}
   goldenZombiePrefab: {fileID: 2261795301874020217, guid: 896c3f268fada544fb4680283cb48db1, type: 3}
-  goldenZombieChance: 0.35
+  goldenZombieChance: 0.2
   targetA: {fileID: 295422888}
   targetB: {fileID: 11684647}
   players:
@@ -22497,7 +22497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
   m_SerializedVersion: 0
   m_AgentTypeID: 0
-  m_CollectObjects: 2
+  m_CollectObjects: 0
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
